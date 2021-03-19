@@ -1,0 +1,222 @@
+{% import 'comment.html' as comment_shab %}
+{% import 'address.html' as address_shab %}
+{% import 'cart_item.html' as cart_item %}
+
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.mCustomScrollbar.min.css') }}">
+    {% block styles %}
+    {% endblock %}
+    <script>
+        function set_body_height(height) {
+            document.body.style.maxHeight = height;
+        }
+
+
+        function set_select_value(value) {
+            document.getElementById('capacity')
+                    .setAttribute('value', value);
+            document.getElementsByClassName('form__select_value')[0]
+                    .getElementsByTagName('p')[0].innerHTML = value;
+        }
+
+
+        function set_cartItem_value(value, block) {
+            let input = block.parentNode.parentNode.parentNode.parentNode.getElementsByTagName('input')[0];
+            input.setAttribute('value', value);
+            const view_block = block.parentNode.parentNode.getElementsByTagName('p')[0];
+            view_block.innerHTML = value;
+        }
+
+
+        function item_select_click(block) {
+            const list = block.getElementsByClassName('item__select_list')[0];
+            list.classList.toggle('item__select_list-active');
+        }
+
+    </script>
+</head>
+
+<body id='body'>
+    <div class="menu">
+        <div class="menu__header">
+            {% include 'logo.html' %}
+            <a class="cart__exit" onclick='toggle_menu()'>
+                Закрыть 
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.45715 6.87132L9.50005 10.9142L10.9143 9.5L6.87137 5.45711L10.9143 1.41421L9.50005 0L5.45715 4.04289L1.41426 0L4.65512e-05 1.41421L4.04294 5.45711L4.673e-05 9.5L1.41426 10.9142L5.45715 6.87132Z" fill="#527C77"/>
+                </svg>          
+            </a>
+        </div>
+        <div class="menu__main">
+            <a href="{{ url_for('product_page', id='1') }}" class="menu__link">Касторовое масло</a>
+            <a href="{{ url_for('product_page', id='3') }}" class="menu__link">Псиллиум</a>
+            <a href="{{ url_for('product_page', id='2') }}" class="menu__link">Белая глина</a>
+        </div>
+        <div class="menu__footer">
+            <a class="menu__inst">Instagram</a>
+            <a class="menu__chat">
+                <svg width="25" height="22" viewBox="0 0 25 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.94324 12.7317L8.92822 20.1605L12.8143 16.2917L19.4771 21.5639L24.1685 0.563934L0.168457 10.5163L5.94324 12.7317ZM17.3104 6.58904L9.96442 13.2596L9.04944 16.6927L7.35919 12.4851L17.3104 6.58904Z" fill="#527C77"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+    <form class="cart" id='cart'>
+        <div class="cart__wrap">
+            <div class="cart__header">
+                <h3 class="cart__title philosopher">Корзина <span class="cart__ellipse"> 0 </span></h3>
+                <a class="cart__exit" onclick='toggle_cart("", 1, false)'>
+                    Закрыть 
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.45715 6.87132L9.50005 10.9142L10.9143 9.5L6.87137 5.45711L10.9143 1.41421L9.50005 0L5.45715 4.04289L1.41426 0L4.65512e-05 1.41421L4.04294 5.45711L4.673e-05 9.5L1.41426 10.9142L5.45715 6.87132Z" fill="#527C77"/>
+                    </svg>          
+                </a>
+            </div>
+            <div class="cart__main">
+                
+            </div>
+            <div class="cart__footer">
+                <div>
+                    <!-- <div class="cart__promo">
+                        Промокод <br>
+                        <input type="text">
+                        <a>
+                            <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M7.64645 1.35355L16.2929 10L7.64645 18.6464L8.35355 19.3536L17.3536 10.3536L17.7071 10L17.3536 9.64645L8.35355 0.646447L7.64645 1.35355ZM0 10.5H15V9.5H0V10.5Z"
+                                    fill="#527C77" />
+                            </svg>
+                        </a>
+                    </div> -->
+                    <div class="cart__sum">
+                        <span>Общая сумма:</span>
+                        <p>0 руб</p>
+                    </div>
+                </div>
+                <span>
+                    <a href='/checkout' class="cart__continue btn btn-t2 btn-t2-hover" onclick='toggle_cart("", 1, false)'>
+                        <span>Перейти к оплате</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </form>
+    <header>{% block header %} {% endblock %}</header>
+
+    {% block main %} {% endblock %}
+
+    <footer class="footer">
+        {% if comment %}
+            <section class="comments">
+                <div class="container">
+                    <div class="comments__wrap">
+                        <h3 class="comments__title philosopher">Отзывы</h3>
+                        <div class="comments__content">
+                            {{ comment_shab.render_comment(
+                                effect=comment.effect,
+                                delivery=comment.effect,
+                                product=comment.product,
+                                comment_text=comment.text,
+                                name=comment.name
+                            ) }}
+                        </div>
+                        <a class="comments__all btn btn-t1 btn-t1-hover" href="{{url_for('surface')}}">
+                            <span>Читать все отзывы</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+
+
+        {% if addresses %}
+            <section class="whereBuy">
+                <div class="container">
+                    <div class="whereBuy__wrap">
+                        <h3 class="whereBuy__title philosopher">
+                            Где купить
+                        </h3>
+                        <div class="whereBuy__address address">
+                            <div class="address__title philosopher">
+                                Адреса магазинов в Минске
+                            </div>
+                            <ul class="address__list" style="
+                            {% if addresses|length == 1 %}
+                                justify-content: center
+                            {% else %}
+                                justify-content: space-around 
+                            {% endif %}">
+                                {% for address in addresses %}
+                                    address_shab.render_address(
+                                        addr=address.address,
+                                        work_time=address.working_time,
+                                        tel=address.tel
+                                    )
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+
+        <div class="mainFooter">
+            <div class="container">
+                <div class="mainFooter__wrap">
+                    <div>
+                        <div class="mainFooter__logo">
+                            {% include 'logo.html' %}
+                        </div>
+                        <ul class="mainFooter__nav">
+                            <li>
+                                <a href="{{ url_for('product_page', id='1') }}">Касторовое масло</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('product_page', id='3') }}">Псиллиум</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('product_page', id='2') }}">Белая глина</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('buy_n_delivery') }}">Оплата и доставка</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('surface') }}">Отзывы</a>
+                            </li>
+                        </ul>
+                        <a class="mainFooter__inst btn btn-t1 btn-t1-hover">
+                            <span>Instagram</span>
+                        </a>
+                    </div>
+                    <div class="mainFooter__copy">
+                        <div>
+                            <a>Copyright 2020 © Pavitra</a>
+                        </div>
+                        <div>
+                            <a>Политика конфиденциальности</a>
+                            <a>Правила использования</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- <script src="{{ url_for('static', filename='js/jquery.mCustomScrollbar.concat.min.js') }}"></script> -->
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    {% block scripts %} {% endblock %}
+</body>
+
+</html>

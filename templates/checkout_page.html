@@ -1,0 +1,296 @@
+{% extends 'base.html' %}
+
+
+{% set form = CheckoutForm() %}
+{% set delivery = 5 %}
+{% set total_price = {'price': delivery} %}
+
+
+{% macro render_cart_item(img_src, title, num, sum, color, capacity)%}
+<div class="checkout__cartItem">
+    <div>
+        <div class="checkout__cartItem_img" style="background-color: {{color}};">
+            <img src="{{img_src}}">
+        </div>
+        <div class="checkout__cartItem_title philosopher">
+            <span>{{title}}</span> <br>
+            <p class="checkout__cartItem_capacity">{{capacity}}</p>
+        </div>
+        <div class="checkout__cartItem_num">
+            <span>{{num}}</span>
+        </div>
+    </div>
+    <div class="checkout__cartItem_price_wrap">
+        <div class="checkout__cartItem_price">{{sum}} руб</div>
+    </div>
+</div>
+{% endmacro %}
+
+
+{% block title %} {% endblock %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/checkout_page.css') }}">
+{% endblock %}
+
+
+{% block header %}
+{% include 'nav.html' %}
+{% endblock %}
+
+
+{% block main %}
+<main>
+    <div class="checkout">
+        <div class="container">
+            <h2 class="checkout__title philosopher">Оформление заказа</h2>
+        </div>
+        {% if products != [] %}
+        <div class="checkout__wrap">
+
+            <form method="POST" action="/redirect-to-pay" class="checkout__main" id="checkout_form">
+                <div class="container">
+                    <div class="checkout__main-wrap">
+                        <div class="checkout__row delivery">
+                            <div class="delivery__title philosopher">Выберите способ доставки</div>
+                            <div class="delivery__tabs">
+                                <label data-tab-name="delivery" class="philosopher delivery__tab delivery__tab-active">
+                                    Курьером {{ delivery }} руб
+                                    <input type="radio" onclick="tab_delivery(this.parentNode, '{{delivery}}')" class='delivery_tab' name='delivery_tab' value='delivery' checked>
+                                </label>
+                                <label data-tab-name="pickup" class="philosopher delivery__tab">
+                                    Самовывоз бесплатно
+                                    <input type="radio" onclick="tab_pickup(this.parentNode, '{{delivery}}')" class='pickup_tab' name='delivery_tab' value='pickup'>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="checkout__row">
+                            <div class="checkout__name checkout__input-wrap">
+                                <label for="name">Ваше имя</label>
+                                {{ form.name() }}
+                            </div>
+                            <div class="checkout__tel checkout__input-wrap">
+                                <label for="tel">Телефон</label>
+                                {{ form.tel() }}
+                            </div>
+                        </div>
+                        <div class="checkout__tab-delivery">
+                            <div class="checkout__row">
+                                <div class="checkout__email checkout__input-wrap">
+                                    <label for="email">Email</label>
+                                    {{ form.email() }}
+                                </div>
+                            </div>
+                            <div class="checkout__row">
+                                <div class="checkout__town checkout__input-wrap">
+                                    <label for="town">Город</label>
+                                    {{ form.town() }}
+                                </div>
+                            </div>
+                            <div class="checkout__row">
+                                <div class="checkout__street checkout__input-wrap">
+                                    <label for="street">Улица</label>
+                                    {{ form.street() }}
+                                </div>
+                                <div class="checkout__houseNum checkout__input-wrap">
+                                    <label for="houseNum">Дом</label>
+                                    {{ form.houseNum() }}
+                                </div>
+                                <div class="checkout__appartment checkout__input-wrap">
+                                    <label for="appartment">Квартира</label>
+                                    {{ form.appartment() }}
+                                </div>
+                            </div>
+                            <div class="checkout__row">
+                                <div class="checkout__comment checkout__textarea-wrap">
+                                    <label for="comment">Комментарий</label>
+                                    {{ form.comment() }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout__row checkout__firstcheckbox">
+                            <div class="checkout__save checkout__checkbox-wrap">
+                                <input type="checkbox" id='save' name='save'>
+                                <label for="save">Сохранить информацию для следующего раза</label>
+                            </div>
+                        </div>
+                        <div class="checkout__row">
+                            <div class="checkout__save checkout__checkbox-wrap">
+                                <input type="checkbox" id='private_data' name='private_data'>
+                                <label id='private_data_label' for="private_data">Я принимаю условия Пользовательского соглашения и даю своё согласие на обработку моей персональной информации на условиях, определенных Политикой конфиденциальности.</label>
+                            </div>
+                        </div>
+                        <div class="checkout__tab-pickup">
+                            <div class="checkout__row checkout__pickup-address">
+                                <label>
+                                    Забрать по адрессу
+                                </label>
+                                <div>
+                                    <span class="philosopher">
+                                        Минск, Хоружей 22 <br>
+                                        10:00 - 19:00, пн-пт
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout__row checkout__pay">
+                            {% if products != [] %}
+                                <a class="checkout__submit btn btn-t2 btn-t2-hover" 
+                                    onclick="document.getElementById('hidden_submit').click()"
+                                >
+                                    <span>Оплатить</span>
+                                </a>
+                            {% else %}
+                                <a class='btn btn-t2 checkout__submit checkout__submit_disabled'>
+                                    <span>Оплатить</span>
+                                </a>
+                            {% endif %}
+                            {{ form.send_button(id="hidden_submit") }}
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="checkout__cart">
+                <div class="checkout__cart_header" onclick="checkout_details_tab(this)">
+                    <div class="philosopher">Информация о заказе</div>
+                    <div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <div class="checkout__cart_main">
+                    {% if products != [] %}
+
+                        {% for product in products %}
+                            {% set current_sum = total_price['price'] %}
+                            {% set _ = total_price.update({'price' : current_sum + product.price}) %}
+
+                            {{ render_cart_item(
+                                img_src=product.img_src,
+                                title=product.title,
+                                num=product.count,
+                                sum=product.price,
+                                color=product.color,
+                                capacity=product.capacity   
+                            )}}
+
+                        {% endfor %}
+
+                    {% endif %}
+                </div>
+                <div class="checkout__cart_footer">
+                    <div>
+                        <div class="checkout__cart__promo">
+                            Промокод <br>
+                            <input type="text">
+                            <a onclick="check_promocode(this)">
+                                <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M7.64645 1.35355L16.2929 10L7.64645 18.6464L8.35355 19.3536L17.3536 10.3536L17.7071 10L17.3536 9.64645L8.35355 0.646447L7.64645 1.35355ZM0 10.5H15V9.5H0V10.5Z"
+                                        fill="#527C77" />
+                                </svg>
+                            </a>
+                        </div>
+                        <div id='cart_price_block'>
+                            <div class="checkout__cart__delivery">
+                                <span>Доставка:</span>
+                                {{ delivery }} руб
+                            </div>
+                            <div class="checkout__cart__sum">
+                                <span>Общая сумма:</span>
+                                {{ total_price['price'] }} руб
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+            <span class="null_products">У вас нет товаров в корзине</span>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/checkout_page.js') }}"></script>
+
+<script>
+    function tab_click(block) {
+        const block_name = block.getAttribute('for');
+        const input_list = block.parentNode.getElementsByTagName('input');
+        const block_input = block.parentNode.querySelector(`input[name=${block_name}]`);
+        for (let i = 0; i < input_list.length; i++) {
+            input_list[i].removeAttribute('checked')
+        }
+        block_input.setAttribute('checked', '');
+
+        const block_label = block;
+        const label_list = block.parentNode.getElementsByTagName('label');
+        for (let i = 0; i < label_list.length; i++) {
+            label_list[i].classList.remove('delivery__tab-active')
+        }
+        block_label.classList.add('delivery__tab-active');
+    }
+
+
+    function tab_pickup(block, delivery_price) {
+        document.getElementsByClassName('checkout__tab-delivery')[0].style.display = 'none';
+        document.getElementsByClassName('checkout__tab-pickup')[0].style.display = 'flex';
+
+        document.getElementsByClassName('checkout__cart__delivery')[0].remove();
+        const total_price_node = document.getElementsByClassName('checkout__cart__sum')[0];
+        const total_price = parseInt(total_price_node.innerText.match(/\d+/));
+        const new_price = total_price - parseInt(delivery_price);
+        total_price_node.innerHTML = `<span>Общая сумма:</span>${new_price} руб`;
+
+        console.log(total_price);
+        console.log(delivery_price);
+        console.log(new_price);
+
+        const tabs_list = block.parentNode.getElementsByClassName('delivery__tab');
+        for (let i=0; i<tabs_list.length; i++) {
+            tabs_list[i].classList.remove('delivery__tab-active')
+        }
+
+        block.classList.add('delivery__tab-active');
+    }
+
+
+    function tab_delivery(block, delivery_price) {
+        document.getElementsByClassName('checkout__tab-delivery')[0].style.display = 'block';
+        document.getElementsByClassName('checkout__tab-pickup')[0].style.display = 'none';
+
+        const delivery_price_node = document.createElement('div');
+        delivery_price_node.classList.add('checkout__cart__delivery');
+        delivery_price_node.innerHTML = `<span>Доставка:</span> ${delivery_price} руб`
+
+        const full_price_node = document.getElementById('cart_price_block');
+        full_price_node.prepend(delivery_price_node);
+
+        const total_price_node = document.getElementsByClassName('checkout__cart__sum')[0];
+        const total_price = parseInt(total_price_node.innerText.match(/\d+/));
+        const new_price = total_price + parseInt(delivery_price);
+        total_price_node.innerHTML = `<span>Общая сумма:</span>${new_price} руб`;
+
+        console.log(total_price);
+        console.log(delivery_price);
+        console.log(new_price);
+
+        const tabs_list = block.parentNode.getElementsByClassName('delivery__tab');
+        for (let i=0; i<tabs_list.length; i++) {
+            tabs_list[i].classList.remove('delivery__tab-active')
+        }
+
+        block.classList.add('delivery__tab-active');
+    }
+
+
+    function checkout_details_tab(block) {
+        block.parentNode.classList.toggle('checkout__cart-active')
+    }
+</script>
+{% endblock %}

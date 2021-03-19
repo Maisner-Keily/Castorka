@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block title %} {% endblock %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/buy_and_delivery.css') }}">
+{% endblock %}
+
+
+{% block header %}
+{% include 'nav.html' %}
+{% endblock %}
+
+
+{% block main %} 
+<main>
+    <div class="pay_n_delivery">
+        <div class="container">
+            <div class="pay_n_delivery__wrap">
+                <h2 class="pay_n_delivery__title philosopher">
+                    Оплата и Доставка
+                </h2>
+                <div class="pay_n_delivery__subtitle">
+                    Окончательная стоимость заказа включает в себя стоимость 
+                    товаров и стоимость доставки. Оплата стоимости товаров и 
+                    стоимости доставки производится едиными формой.
+                </div>
+                {% for elem in elems %}
+                    <div class="pay_n_delivery__block">
+                        <div>{{ elem.key }}</div>
+                        {{ elem.value }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+
+{% block scripts %} 
+
+{% endblock %}

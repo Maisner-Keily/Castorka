@@ -1,0 +1,10 @@
+{% macro render_score(color='#CEF7EE', border=false) %}
+<div class="tear" style="
+    {% if border %}
+        border: 1px solid #DCE4E4;
+        background-color: transparent;
+    {% else %}
+        border: none;
+        background-color: {{color}};
+    {% endif %}"></div>
+{% endmacro %}

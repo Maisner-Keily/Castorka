@@ -1,0 +1,56 @@
+{% import 'score.html' as score %}
+
+{% macro render_comment(effect, delivery, product, comment_text, name='Пользователь', border=false) %}
+<div class="comment">
+    <div>
+        <div class="comment__author philosopher">
+            {{name}}
+        </div>
+        <div class="comment__score">
+            <div class="comment__effect">
+                <div>Эффект</div>
+                <div class="comment__score_num">
+                    {% for i in range(1, effect + 1) %}
+                        {{ score.render_score('#FFEB85') }}
+                    {% endfor %}
+                    {% if effect < 5 %}
+                        {% for i in range(1, 6 - effect) %}
+                            {% if border %}
+                                {{ score.render_score(border=true) }}
+                            {% else %}
+                                {{ score.render_score(color="#CEF7EE") }}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="comment__delivery">
+                <div>Доставка</div>
+                <div class="comment__score_num">
+                    {% for i in range(1, delivery + 1) %}
+                        {{ score.render_score('#FFEB85') }}
+                    {% endfor %}
+                    {% if delivery < 5 %}
+                        {% for i in range(1, 6 - delivery) %}
+                            {% if border %}
+                                {{ score.render_score(border=true) }}
+                            {% else %}
+                                {{ score.render_score(color="#CEF7EE") }}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="comment__product philosopher">
+            {{product}}
+        </div>
+        <div class="comment__text">
+            {{comment_text}}
+        </div>
+    </div>
+</div>
+{% endmacro %}

@@ -1,0 +1,3 @@
+{% macro render_select_item(value) %}
+<a class="form__select_option" onclick="set_select_value('{{value}}'); render_price('{{value}}')">{{ value }}</a>
+{% endmacro %}

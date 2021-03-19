@@ -1,0 +1,39 @@
+.hero
+    min-height: 630px
+
+    &__wrap
+        min-height: 630px
+    
+    &__img
+        height: 580px
+        transform: translateX(0%) translateY(7%)
+        
+        @media screen and ( max-width: 1440px )
+            transform: translateX(25%) translateY(7%)
+
+        @media screen and ( max-width: 1120px )  
+            height: 530px
+
+        @media screen and ( max-width: 1024px )
+            transform: translateX(50%) translateY(7%)
+
+        @media screen and ( max-width: 900px ) 
+            height: 400px
+            position: absolute
+            left: 50%
+            top: 0
+            transform: translateX(-60%) translateY(6%)
+
+        @media screen and ( max-width: 768px )
+            height: 360px
+            transform: translateX(-50%) translateY(11%)
+
+        @media screen and ( max-width: 450px )
+            height: 350px
+            
+        @media screen and ( max-width: 400px ) 
+            height: 230px
+            transform: translateX(-60%) translateY(0%)
+
+        @media screen and ( max-width: 340px ) 
+            height: 220px

@@ -1,0 +1,49 @@
+<nav class="nav">
+    <div class="container">
+        <div class="nav__wrap">
+            <div class="nav__links">
+                <div class="nav__logo">
+                    {% include 'logo.html' %}
+                </div>
+                <ul class="nav__ul">
+                    <li class="nav__li">
+                        <a href="{{ url_for('product_page', id='1') }}" class="nav__link">Касторовое масло</a>
+                    </li>
+                    <li class="nav__li">
+                        <a href="{{ url_for('product_page', id='3') }}" class="nav__link">Псиллиум</a>
+                    </li>
+                    <li class="nav__li">
+                        <a href="{{ url_for('product_page', id='2') }}" class="nav__link">Белая глина</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav__buttons communicate">
+                <a class="communicate__burger" onclick="toggle_menu()">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </a>
+                <a class="communicate__inst btn btn-t1 btn-t1-hover">
+                    <span>Instagram</span>
+                </a>
+                <a class="communicate__cart btn btn-t1 btn-t1-hover" onclick="render_cart_items(); toggle_cart()">
+                    <span>
+                        <svg width="20" height="25" viewBox="0 0 20 19">
+                            <path d="M4.44439 18.8888C5.67169 18.8888 6.66661 17.8939 6.66661 16.6666C6.66661 15.4393 5.67169 14.4443 4.44439 14.4443C3.21709 14.4443 2.22217 15.4393 2.22217 16.6666C2.22217 17.8939 3.21709 18.8888 4.44439 18.8888Z" fill="inherit"/>
+                            <path d="M15.5555 18.8888C16.7828 18.8888 17.7777 17.8939 17.7777 16.6666C17.7777 15.4393 16.7828 14.4443 15.5555 14.4443C14.3282 14.4443 13.3333 15.4393 13.3333 16.6666C13.3333 17.8939 14.3282 18.8888 15.5555 18.8888Z" fill="inherit"/>
+                            <path d="M19.9967 3.33333H5.7L4.71667 0.72C4.63705 0.508282 4.49471 0.325908 4.30867 0.197249C4.12263 0.0685893 3.90175 -0.000225596 3.67556 5.55631e-07H0V2.22222H2.92L3.33333 3.33333L5.96444 11.2256C6.05672 11.5024 6.20263 11.7584 6.39384 11.9789C6.58506 12.1994 6.81783 12.3801 7.07887 12.5106C7.33991 12.6411 7.62411 12.7189 7.91523 12.7396C8.20635 12.7603 8.49869 12.7234 8.77556 12.6311L18.48 9.39556C18.9229 9.24806 19.308 8.96485 19.5809 8.58611C19.8537 8.20737 20.0003 7.75233 20 7.28556L19.9967 3.33333Z" fill="inherit"/>
+                        </svg>
+                        <div class="communicate__ellipse"> 0 </div>
+                    </span>
+                </a>
+                <a class="communicate__chat btn btn-t1 btn-t1-hover">
+                    <span>
+                        <svg width="25" height="22" viewBox="0 0 25 22">
+                            <path d="M5.94324 12.7317L8.92822 20.1605L12.8143 16.2917L19.4771 21.5639L24.1685 0.563934L0.168457 10.5163L5.94324 12.7317ZM17.3104 6.58904L9.96442 13.2596L9.04944 16.6927L7.35919 12.4851L17.3104 6.58904Z" fill="inherit"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,188 @@
+// при импорте указать цвет текста для .nav
+.logo
+    @media screen and ( max-width: 400px )
+        display: flex
+        flex-direction: row
+        align-items: flex-end
+
+        svg
+            display: block
+
+.nav
+    color: inherit
+    position: absolute
+    top: 0
+    left: 50%
+    transform: translateX(-50%)
+    z-index: 5
+    width: 100%
+
+    &__wrap
+        display: flex
+        flex-direction: row
+        background-color: transparent
+        justify-content: space-between
+        align-items: center
+        padding: 30px 0
+        width: 100%
+
+    &__link
+        position: relative
+
+        &::before
+            content: ''
+            display: block
+            width: 0
+            position: absolute
+            right: 0
+            bottom: -2px
+            height: 2px
+            background-color: #527C77
+            transition: width .4s ease
+
+        &:hover::before
+            width: 100%
+            left: 0
+            right: auto
+            transition: width .4s ease
+
+    &__links
+        display: flex
+        flex-direction: row
+        align-items: center
+
+    &__ul
+        list-style: none
+        display: flex
+        flex-direction: row
+        padding-bottom: 3px
+
+        @media screen and (max-width: 1024px)
+            display: none
+
+    &__li
+        display: block
+        margin: 0 20px
+
+    &__logo
+        margin-right: 20px
+        padding: 5px 0
+        display: flex
+        flex-direction: row
+        align-items: center
+        transform: translateY(-2.5px)
+
+        @media screen and ( max-width: 400px )
+            margin-right: 0
+
+        img
+            display: block
+
+            &:first-child
+                margin-right: 10px
+
+.communicate
+    border: 1px solid #61ADA3
+    display: flex
+    flex-direction: row
+    align-items: center
+    margin-right: 1px
+
+    &>a
+        display: flex
+        height: 60px
+        flex-direction: column
+        align-items: center
+        justify-content: center
+
+        @media screen and (max-width: 1024px)
+            height: 50px
+
+        @media screen and (max-width: 768px)
+            height: 40px
+
+    &__burger
+        width: 70px
+        border-right: 1px solid #61ADA3
+        display: none !important
+
+        @media screen and (max-width: 1024px)
+            display: flex !important
+
+        @media screen and (max-width: 768px)
+            width: 60px
+        
+    &__burger div
+        width: 27px
+        height: 2px
+        background-color: #527C77
+        margin: 2.5px auto
+
+    &__inst
+        border-right: 1px solid #61ADA3
+        width: 160px !important
+
+        @media screen and (max-width: 1024px)
+            display: none !important
+
+        &:hover
+            color: #ffffff
+
+    &__cart
+        border-right: 1px solid #61ADA3
+        width: 70px !important
+        position: relative
+
+        @media screen and (max-width: 1024px)
+            border-right: none
+
+        @media screen and (max-width: 768px)
+            width: 60px
+
+        &:hover
+            color: #fff
+
+            svg
+                fill: #fff
+
+        svg
+            display: block
+            border-radius: 50%
+            margin-left: -4px
+            position: absolute
+            left: 50%
+            fill: #527C77
+            top: 50%
+            transform: translateX(-60%) translateY(-50%)
+            z-index: 1
+
+    &__ellipse
+        width: 18px
+        height: 18px
+        border-radius: 50%
+        background-color: #F9EB6E
+        position: absolute
+        left: 60%
+        top: 39%
+        transform: translateX(-50%) translateY(-50%)
+        z-index: 2
+        font-size: 10px
+        display: flex
+        flex-direction: row
+        align-items: center
+        justify-content: center
+        color: #527C77
+
+    &__chat
+        width: 70px !important
+        fill: #527C77
+        
+        @media screen and (max-width: 1024px)
+            display: none !important
+
+        &:hover
+            color: #fff
+
+            span
+                svg
+                    fill: #fff

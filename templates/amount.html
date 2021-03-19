@@ -1,0 +1,7 @@
+{% macro render_amount(value=1, class='', from_prod_page=False) %}
+    <div class="amount {{class}}">
+        <a onclick='amount_plus(this); {% if from_prod_page %}render_price(){% endif %}' onselectstart="return false" onmousedown="return false">+</a>
+        <input type="text" value='{{ value }}'>
+        <a onclick='amount_minus(this); {% if from_prod_page %}render_price(){% endif %}' onselectstart="return false" onmousedown="return false">-</a>
+    </div>
+{% endmacro %}

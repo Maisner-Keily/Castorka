@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% import 'comment.html' as comment_component %}
+
+{% macro render_radio_product(text, id, checked=False) %}
+<div>
+    <input 
+        id="product{{id}}" 
+        class='addSurface__input addSurface__input-product' 
+        type="radio" 
+        name='product'
+        value='{{text}}'
+        onclick="
+            let list = document.getElementsByClassName('addSurface__input-product');
+            for (let i=0; i<list.length; i++) {
+                list[0].removeAttribute('checked');
+            }
+            this.setAttribute('checked', '');
+        " {% if checked %} checked {% endif %}>
+    <label for="product{{id}}" class="addSurface__tab philosopher">{{text}}</label>
+</div>
+{% endmacro %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/surface_page.css') }}">
+{% endblock %}
+
+{% block header %}
+<header class="header">
+    <div class="container">
+        <div class="header__wrap">
+            {% include "nav.html" %}
+            <div class="hero">
+                <h2 class="hero__title philosopher">Отзывы</h2>
+                <div class="surfaces" id='surfaces'>
+
+                    {% for comment in comments %}
+                    
+                        {{ comment_component.render_comment(
+                            effect=comment.effect, 
+                            delivery=comment.delivery, 
+                            product=comment.product, 
+                            comment_text=comment.text, 
+                            name=comment.name,
+                            border=true) }}
+
+                    {% endfor %}
+
+                </div>
+                <div class='button_wrap'>
+                    <a class='more btn btn-t1 btn-t1-hover' id='show_more'>
+                        <span>Показать больше</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+<!-- ДОПИСАТЬ ОТПРАВКУ КОММЕНТА -->
+<!-- ВАЛИДАЦИЯ НА КЛИЕНТЕ СДЕЛАНА -->
+<!-- ОСТАЛОСЬ ПОЛУЧИТЬ ДАННЫЕ С ФОРМЫ, -->
+<!-- ОБРАБОТАТЬ, ЗАПИСАТЬ В БД -->
+<!-- ВОЗМОЖНО НУЖНО ЗАПУШИТЬ КОММЕНТ ВЕРХНИМ ПО СТРАНИЦЕ ДЛЯ ВИДА -->
+{% block main %}
+<main>
+    <form action="/" method='post' class="addSurface" id="addSurface_form">
+        <div class="container">
+            <div class="addSurface__wrap">
+                <div class="addSurface__header" onclick="this.parentNode.parentNode.parentNode.classList.toggle('addSurface-active')">
+                    <div class="addSurface__title philosopher">Оставить отзыв</div>
+                    <div class="addSurface__opentab">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <div class="addSurface__content">
+                    <div class="addSurface__main">
+                        <div class="addSurface__row">
+                            <div class="addSurface__input_wrap">
+                                <label>
+                                    Ваше имя
+                                    <input type="text" name="name" class="addSurface__input-field">
+                                </label>
+                            </div>
+                            <div class="addSurface__input_wrap">
+                                <label>
+                                    Email
+                                    <input type="email" name="email" id="addSurface__email" class="addSurface__input-field">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="addSurface__row">
+                            <div class="addSurface__tabs">
+                                <label>
+                                    Выберите продукт
+                                    <div class="addSurface__tabs_wrap">
+                                        {{ render_radio_product(
+                                            text=products[0].title, 
+                                            id=products[0].id,
+                                            checked=True) }}
+
+                                        {% if products|length > 1 %}
+
+                                            {% set new_products = products[1 : products|length] %}
+
+                                            {% for product in new_products %}
+
+                                                {{ render_radio_product(
+                                                    text=product.title, 
+                                                    id=product.id) }}
+
+                                            {% endfor %}
+
+                                        {% endif %}
+
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="addSurface__score_wrap">
+                                <label>
+                                    Эффект
+                                    <div class="addSurface__score">
+                                        <input type="radio" id="effect-5" name="effect" value="5" onclick="
+                                            let list = document.getElementsByName('effect');
+                                            for (let i=0; i<list.length; i++) {
+                                                list[i].removeAttribute('checked');
+                                            }
+                                            this.setAttribute('checked', '');
+                                        ">
+                                        <label for="effect-5" title="Оценка «5»"></label>
+                                        <input type="radio" id="effect-4" name="effect" value="4" onclick="
+                                            let list = document.getElementsByName('effect');
+                                            for (let i=0; i<list.length; i++) {
+                                                list[i].removeAttribute('checked');
+                                            }
+                                            this.setAttribute('checked', '');
+                                        ">
+                                        <label for="effect-4" title="Оценка «4»"></label>
+                                        <input type="radio" id="effect-3" name="effect" value="3" onclick="
+                                            let list = document.getElementsByName('effect');
+                                            for (let i=0; i<list.length; i++) {
+                                                list[i].removeAttribute('checked');
+                                            }
+                                            this.setAttribute('checked', '');
+                                        ">
+                                        <label for="effect-3" title="Оценка «3»"></label>
+                                        <input type="radio" id="effect-2" name="effect" value="2" onclick="
+                                            let list = document.getElementsByName('effect');
+                                            for (let i=0; i<list.length; i++) {
+                                                list[i].removeAttribute('checked');
+                                            }
+                                            this.setAttribute('checked', '');
+                                        ">
+                                        <label for="effect-2" title="Оценка «2»"></label>
+                                        <input type="radio" id="effect-1" name="effect" value="1" onclick="
+                                            let list = document.getElementsByName('effect');
+                                            for (let i=0; i<list.length; i++) {
+                                                list[i].removeAttribute('checked');
+                                            }
+                                            this.setAttribute('checked', '');
+                                        ">
+                                        <label for="effect-1" title="Оценка «1»"></label>
+                                    </div>
+                                </label>
+                                <label>
+                                    Доставка
+                                    <input class="addSurface__score_result-delivery" type="text">
+                                    <div class="addSurface__score">
+                                        <input type="radio" id="delivery-5" name="delivery" value="5" onclick="
+                                            let list = document.getElementsByName('delivery');
+                                            for (let i=0; i<list.length; i++) {
+                                                list[i].removeAttribute('checked');
+                                            }
+                                            this.setAttribute('checked', '');
+                                        ">
+                                        <label for="delivery-5" title="Оценка «5»"></label>
+                                        <input type="radio" id="delivery-4" name="delivery" value="4" onclick="
+                                            let list = document.getElementsByName('delivery');
+                                            for (let i=0; i<list.length; i++) {
+                                                list[i].removeAttribute('checked');
+                                            }
+                                            this.setAttribute('checked', '');
+                                        ">
+                                        <label for="delivery-4" title="Оценка «4»"></label>
+                                        <input type="radio" id="delivery-3" name="delivery" value="3" onclick="
+                                            let list = document.getElementsByName('delivery');
+                                            for (let i=0; i<list.length; i++) {
+                                                list[i].removeAttribute('checked');
+                                            }
+                                            this.setAttribute('checked', '');
+                                        ">
+                                        <label for="delivery-3" title="Оценка «3»"></label>
+                                        <input type="radio" id="delivery-2" name="delivery" value="2" onclick="
+                                            let list = document.getElementsByName('delivery');
+                                            for (let i=0; i<list.length; i++) {
+                                                list[i].removeAttribute('checked');
+                                            }
+                                            this.setAttribute('checked', '');
+                                        ">
+                                        <label for="delivery-2" title="Оценка «2»"></label>
+                                        <input type="radio" id="delivery-1" name="delivery" value="1" onclick="
+                                            let list = document.getElementsByName('delivery');
+                                            for (let i=0; i<list.length; i++) {
+                                                list[i].removeAttribute('checked');
+                                            }
+                                            this.setAttribute('checked', '');
+                                        ">
+                                        <label for="delivery-1" title="Оценка «1»"></label>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="addSurface__row">
+                            <div class="addSurface__textarea">
+                                <label>
+                                    Текст отзыва
+                                    <textarea name="comment_text" class="addSurface__input-field"></textarea>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="addSurface__footer">
+                        <a id="addSurface__send" class="btn btn-t1 btn-t1-hover">
+                            <span>Отправить</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/surface_page.js') }}"></script>
+{% endblock %}

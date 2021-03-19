@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% import 'amount.html' as amount %}
+{% import 'product_select_item.html' as select_item %}
+{% import 'product_numered_li.html' as numered_li %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product_page.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product_page-oil.css') }}">
+{% endblock %}
+
+{% block header %}
+<header class="header">
+    {% include 'nav.html' %}
+    <div class="hero">
+        <img class="hero__img" src="{{ product.product_img_src }}">
+        <div class="hero__bg" style="background-color:{{ product.bg_color }};"></div>
+        <div class="container">
+            <div class="hero__wrap">
+                <h2 class="hero__title philosopher">{{ product.title }}</h2>
+                <form class="form">
+                    <div class="form__wrapper">
+                        <div class="form__capacity">
+                            <p>Объём</p>
+                            <input type="text" id="capacity">
+                            <div class="form__select" onclick="select_click(this)" onselectstart="return false" onmousedown="return false">
+                                <span class="form__select_value">
+                                    <p>{{ variables[0]['title'] }}</p>
+                                    <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+                                        <path d="M6.5 8L12.1292 0.5H0.870835L6.5 8Z" fill="#527C77" />
+                                    </svg>
+                                </span>
+                                <div class="form__select_list">
+                                    {% for variable in variables %}
+                                        {{ select_item.render_select_item(variable['title']) }}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form__num">
+                            <span>Количество</span>
+                            {{ amount.render_amount(value=1, class='form__amount', from_prod_page=True) }}
+                        </div>
+                        <div class="form__price">
+                            <p>Цена</p>
+                            <span>{{ variables[0]['price'] }}</span>
+                        </div>
+                    </div>
+                    <div class="hero__description">{{ product.description }}</div>
+                    <a class="form__submit btn btn-t2 btn-t2-hover" onclick="toggle_cart('{{ product.title }}', true, true, true)">
+                        <span>Купить</span>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block main %}
+<main>
+    <section class="properties">
+        <div class="container">
+            <div class="properties__wrap">
+                <div class="properties__img">
+                    <img src="{{ url_for('static', filename='img/proprtyes_img1.png') }}">
+                </div>
+                <div class="properties__content">
+                    <div class="properties__title philosopher">Свойства</div>
+                    <ul class="properties__list">
+                        {{ numered_li.render_numered_li('01', 'Очищает организм от токсинов, улучшает пищеварение') }}
+                        {{ numered_li.render_numered_li('02', 'Является действенным и мягким слабительным') }}
+                        {{ numered_li.render_numered_li('03', 'Увлажняет и разглаживает кожу, заживляет раны') }}
+                        {{ numered_li.render_numered_li('04', 'Укрепляет волосы, избавляет от перхоти') }}
+                    </ul>
+                    <div class="properties__discription">
+                        Как известно, здоровье начинается с чистого кишечника. Поэтому главное назначение масла Pavitra - приём внутрь. Если вы замечали у себя неприятный запах изо рта, высыпания на коже, головные боли или нарушения в работе желудочно-кишечного тракта, то это повод задуматься о начале систематического использования касторового масла. Оно бережно обволакивает стенки кишечника, выводит вредные вещества, восстанавливает и нормализует здоровую флору.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="fact">
+        <div class="container">
+            <div class="fact__wrap">
+                <div class="fact__img fact__img1">
+                    <img src="{{ url_for('static', filename='img/fact2.png') }}">
+                </div>
+                <div class="fact__text philosopher">Масло Pavitra при приеме внутрь бережно очищает кишечник. Вы ощутите легкость, и как приятный бонус - животик уменьшится в объемах.</div>
+                <div class="fact__img fact__img2">
+                    <img src="{{ url_for('static', filename='img/fact1.png') }}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="properties2">
+        <div class="container">
+            <div class="properties2__wrap">
+                <div class="properties2__text">
+                    Масло также можно применять наружно: оно отлично очищает и восстанавливает кожный покров, при этом не сушит кожу и не образует плёнку. Благодаря питательным веществам, кожа становится более гладкой и упругой. Применение касторки на волосы  позволяет восстановить их, сделать более густыми и избавиться от перхоти.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="resultImages">
+        <div class="container">
+            <div class="resultImages__wrap">
+                <img id="resultImg1" src="{{ url_for('static', filename='img/resultImg1.png') }}">
+                <img id="resultImg2" src="{{ url_for('static', filename='img/resultImg2.png') }}">
+                <img id="resultImg3" src="{{ url_for('static', filename='img/resultImg3.png') }}">
+                <img src="{{ url_for('static', filename='img/list.png') }}">
+            </div>
+        </div>
+    </div>
+    <div class="howUse">
+        <div class="container">
+            <div class="howUse__wrap">
+                <div class="howUse__content">
+                    <div class="howUse__title philosopher">Как использовать внутрь для очищения?</div>
+                    <div class="howUse__text">
+                        <p>Масло рекомендуется пить после 15 часов дня и до 20 часов вечера (идеальное время с 17:00-19:00). Последняя еда в день чистки в 12:00. Перерыв между едой и приемом касторки должен составлять хотя бы 4-5 часов. Не забудьте выпить достаточное количество воды- 1-1.5 л</p>
+                        <p>Берём касторовое масло: 2 мл на 1 кг веса (например, вес 70 кг - нужно взять 140 мл, касторки), выжимаем сок апельсина: нужно в два раза больше, чем касторки (280 мл), сок ничем не разбавляем. Соотношение касторового масла и сока - 1:2. Лучше применять именно свежевыжатый, в крайнем случае - можете использовать готовый. Оба ингредиента смешиваем в стакане и сразу же выпиваем. Ждем пока начнет крутить в животике.</p>
+                        <p>Обычно через 1,5-2 часа начинается освобождение кишечника от вредных веществ, но может и раньше (даже через 40 минут) или позже (утром следующего дня) - всё зависит от чувствительности организма.</p>
+                        <p>Обращаем ваше внимание, что употреблять внутрь можно не любое касторовое масло. В сыродавленном содержатся ядовитые вещества, опасные для здоровья. Мы же предлагаем вам касторку именно для употребления внутрь.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fact">
+        <div class="container">
+            <div class="fact__wrap">
+                <div class="fact__img fact__img2">
+                    <img src="">
+                </div>
+                <div class="fact__text philosopher">Проводим очищение 1 раз в неделю - 5-6 раз, затем делаем перерыв на 3 месяца.</div>
+                <div class="fact__img fact__img2">
+                    <img src="{{ url_for('static', filename='img/fact2.png') }}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="howUse2">
+        <div class="container">
+            <div class="howUse2__wrap">
+                <div class="howUse2__img">
+                    <img src="{{ url_for('static', filename='img/secret2.png') }}">
+                </div>
+                <div class="howUse2__content">
+                    <div class="howUse2__title philosopher">
+                        Как принимать пищевую глину Pavitra?
+                    </div>
+                    <div>
+                        <p>В медицине и косметике касторовое масло применяется не одну сотню лет. Но где-то оно используется в недостаточных количествах, а где-то не с теми ингредиентами.</p>
+                        <ul class="howUse2__list">
+                            <li>Pavitra предлагает вам самый действенный набор:</li>
+                            <li>a)	Касторовое масло</li>
+                            <li>b) Каолиновая глина</li>
+                            <li>c) Псиллиум</li>
+                        </ul>
+                        <p>Использование этих продуктов вместе позволит вам добиться максимального результата. Каолиновая глина способствует выведению вредных веществ, а касторовое масло ускорит процесс восстановления организма. Псиллиум избавит от лишнего веса.</p>
+                    </div>
+                    <div class="whyMe">
+                        <div class="whyMe__title philosopher">Почему Pavitra?</div>
+                        <ul class="whyMe__list">
+                            {{ numered_li.render_numered_li('01', 'Пищевое масло холодного отжима, без добавок и температурной обработки') }}
+                            {{ numered_li.render_numered_li('02', 'Покупая продукт напрямую у производителя, вы защищаете себя от покупки некачественного продукта и подделок. А также экономите свои деньги') }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %} 
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.stellar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/product_page.js') }}"></script>
+{% endblock %}

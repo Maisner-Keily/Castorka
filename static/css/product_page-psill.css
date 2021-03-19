@@ -1,0 +1,167 @@
+@media screen and (max-width: 900px) {
+  /* line 2, ../../sass/product_page-psill.sass */
+  .hero__wrap {
+    padding-top: 350px; } }
+@media screen and (max-width: 400px) {
+  /* line 2, ../../sass/product_page-psill.sass */
+  .hero__wrap {
+    padding-top: 225px; } }
+/* line 9, ../../sass/product_page-psill.sass */
+.hero__img {
+  height: 390px;
+  width: 350px;
+  position: absolute; }
+  @media screen and (max-width: 1120px) {
+    /* line 9, ../../sass/product_page-psill.sass */
+    .hero__img {
+      width: 300px;
+      height: 330px; } }
+  @media screen and (max-width: 900px) {
+    /* line 9, ../../sass/product_page-psill.sass */
+    .hero__img {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      -webkit-transform: translateX(-50%) translateY(20%);
+              transform: translateX(-50%) translateY(20%);
+      width: 247px;
+      height: 273px; } }
+  @media screen and (max-width: 400px) {
+    /* line 9, ../../sass/product_page-psill.sass */
+    .hero__img {
+      width: 125px;
+      height: 137px; } }
+
+/* line 31, ../../sass/product_page-psill.sass */
+.properties__useTitle {
+  font-size: 36px;
+  line-height: 120%;
+  margin: 30px 0; }
+  @media screen and (max-width: 400px) {
+    /* line 31, ../../sass/product_page-psill.sass */
+    .properties__useTitle {
+      margin: 40px 0 20px 0; } }
+
+/* line 39, ../../sass/product_page-psill.sass */
+.properties2 {
+  padding: 70px 0 80px; }
+  @media screen and (max-width: 1024px) {
+    /* line 39, ../../sass/product_page-psill.sass */
+    .properties2 {
+      padding: 30px 0 40px; } }
+  @media screen and (max-width: 768px) {
+    /* line 39, ../../sass/product_page-psill.sass */
+    .properties2 {
+      padding: 30px 0 70px; } }
+  @media screen and (max-width: 400px) {
+    /* line 39, ../../sass/product_page-psill.sass */
+    .properties2 {
+      padding: 0;
+      padding-bottom: 40px; } }
+
+/* line 52, ../../sass/product_page-psill.sass */
+.properties3 {
+  width: 100%;
+  padding: 30px 0; }
+  @media screen and (max-width: 400px) {
+    /* line 52, ../../sass/product_page-psill.sass */
+    .properties3 {
+      padding: 0 0 40px 0; } }
+  /* line 59, ../../sass/product_page-psill.sass */
+  .properties3__wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    width: 100%; }
+    @media screen and (max-width: 768px) {
+      /* line 59, ../../sass/product_page-psill.sass */
+      .properties3__wrap {
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center; } }
+  /* line 68, ../../sass/product_page-psill.sass */
+  .properties3__text {
+    width: 50%; }
+    @media screen and (max-width: 768px) {
+      /* line 68, ../../sass/product_page-psill.sass */
+      .properties3__text {
+        width: 70%; } }
+    @media screen and (max-width: 450px) {
+      /* line 68, ../../sass/product_page-psill.sass */
+      .properties3__text {
+        width: 100%; } }
+
+/* line 77, ../../sass/product_page-psill.sass */
+.howUse2 {
+  padding-bottom: 120px; }
+  @media screen and (max-width: 1024px) {
+    /* line 77, ../../sass/product_page-psill.sass */
+    .howUse2 {
+      padding-bottom: 90px; } }
+  @media screen and (max-width: 400px) {
+    /* line 77, ../../sass/product_page-psill.sass */
+    .howUse2 {
+      padding-bottom: 70px; } }
+  /* line 86, ../../sass/product_page-psill.sass */
+  .howUse2__img {
+    margin-top: 0; }
+  /* line 89, ../../sass/product_page-psill.sass */
+  .howUse2__title {
+    font-size: 36px;
+    line-height: 120%;
+    margin: 30px 0; }
+    @media screen and (max-width: 1024px) {
+      /* line 89, ../../sass/product_page-psill.sass */
+      .howUse2__title {
+        font-size: 32px; } }
+    @media screen and (max-width: 400px) {
+      /* line 89, ../../sass/product_page-psill.sass */
+      .howUse2__title {
+        margin: 40px 0 20px 0; } }
+
+/* line 100, ../../sass/product_page-psill.sass */
+.whyMe {
+  padding-bottom: 30px; }
+  /* line 103, ../../sass/product_page-psill.sass */
+  .whyMe__title {
+    line-height: 120%; }
+
+@media screen and (max-width: 600px) {
+  /* line 107, ../../sass/product_page-psill.sass */
+  .fact__wrap {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; } }
+@media screen and (max-width: 600px) {
+  /* line 112, ../../sass/product_page-psill.sass */
+  .fact__img {
+    position: static;
+    -webkit-transform: translateY(0);
+            transform: translateY(0); } }
+@media screen and (max-width: 600px) {
+  /* line 117, ../../sass/product_page-psill.sass */
+  .fact__img1 {
+    left: auto;
+    width: 35%; } }
+@media screen and (max-width: 600px) {
+  /* line 122, ../../sass/product_page-psill.sass */
+  .fact__img2 {
+    right: auto;
+    width: 75%; } }
+@media screen and (max-width: 600px) {
+  /* line 127, ../../sass/product_page-psill.sass */
+  .fact__text {
+    font-size: 24px;
+    width: 100%;
+    margin: 30px auto 20px; } }

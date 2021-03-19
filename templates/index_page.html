@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% import 'product.html' as product_shab %}
+
+{% block title %} {% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/slick.css') }}">
+{% endblock %}
+
+{% block header %}
+<header class="header">
+    <div class="header__bgTwo"></div>
+    <div class="header__bg">
+        <img src="{{ url_for('static', filename='img/background.png') }}">
+    </div>
+    <div class="container">
+        <div class="header__wrap">
+            {% include "nav.html" %}
+            <div class="hero">
+                <div class="hero__stamp hero__stamp1">
+                    <img src="{{ url_for('static', filename='img/stamp1.png') }}">
+                </div>
+                <div class="hero__stamp hero__stamp2">
+                    <img src="{{ url_for('static', filename='img/stamp2.png') }}">
+                </div>
+                <h1 class="hero__title philosopher">Продукты <br> для вашего <br> здоровья</h1>
+                <div class="hero__subtitle">Покупайте лучшие товары <br> напрямую у производителя</div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block main %}
+<main class="main">
+    <section class="products">
+        <div class="container">
+            <div class="products__wrap">
+
+                {% for product in products %}
+
+                    {{ product_shab.render_product(
+                        img_url=product.product_img_src, 
+                        alt=product.title, 
+                        features=['Красота', 'Очищение'], 
+                        title=product.title, 
+                        subtitle=product.short_description, 
+                        price='34 руб',
+                        page_href=url_for('product_page', id=product.id),
+                        bg_color=product.bg_color,
+                        class='product' ~ product.id) }}
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+    <section class="secrets">
+        <div class="container">
+            <div class="secrets__wrap">
+                <h2 class="secrets__title philosopher">
+                    Секреты красоты <br> и здоровья
+                </h2>
+                <div class="secret secret1">
+                    <div class="secret__img">
+                        <img src="{{ url_for('static', filename='img/secret1.png') }}">
+                    </div>
+                    <div class="secret__content secret1__content">
+                        <h4 class="secret__title philosopher">Индийская наука <br> Аюрведа тысячелетиями <br> хранит секреты красоты
+                            <br> и молодости</h4>
+                        <p class="secret__text">Белая глина, псиллиум, <br> качественное касторовое <br> масло,
+                            соединенные в <br> рецептах для различных <br> целей, способны <br> преобразить любую <br>
+                            красавицу.</p>
+                    </div>
+                </div>
+                <div class="secret secret2">
+                    <div class="secret__content secret2__content">
+                        <p class="secret__text">
+                            Используйте данные средства, сочетая <br> и экспериментируя, и вам не <br> понадобится
+                            дорогостоящая косметика <br> из бутиков.
+                        </p>
+                        <p class="secret__text">
+                            Индийцы верят в то, что каждое <br> средство само по себе способно <br> преобразить и
+                            вдохнуть здоровье и <br> красоту в любую девушку. Но наиболее <br> действенный способ, как
+                            утверждают <br> специалисты по Аюрведе, это сочетать <br> различные препараты, подаренные
+                            <br> природой.
+                        </p>
+                    </div>
+                    <div class="secret__img">
+                        <img src="{{ url_for('static', filename='img/secret2.png') }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="hr_image" style="background-image: url('{{ url_for('static', filename='img/index__parallax.png') }}');" data-stellar-background-ratio="0.5"></div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/slick.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.stellar.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}

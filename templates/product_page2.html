@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% import 'amount.html' as amount %}
+{% import 'product_select_item.html' as select_item %}
+{% import 'product_numered_li.html' as numered_li %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product_page.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product_page-glina.css') }}">
+{% endblock %}
+
+{% block header %}
+<header class="header">
+    {% include 'nav.html' %}
+    <div class="hero">
+        <img class="hero__img" src="{{ product.product_img_src }}">
+        <div class="hero__bg" style="background-color:{{ product.bg_color }};"></div>
+        <div class="container">
+            <div class="hero__wrap">
+                <h2 class="hero__title philosopher">{{ product.title }}</h2>
+                <form class="form">
+                    <div class="form__wrapper">
+                        <div class="form__capacity">
+                            <p>Объём</p>
+                            <input type="text" id="capacity">
+                            <div class="form__select" onclick="select_click(this)" onselectstart="return false" onmousedown="return false">
+                                <span class="form__select_value">
+                                    <p>{{ variables[0]['title'] }}</p>
+                                    <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+                                        <path d="M6.5 8L12.1292 0.5H0.870835L6.5 8Z" fill="#527C77" />
+                                    </svg>
+                                </span>
+                                <div class="form__select_list">
+                                    {% for variable in variables %}
+                                        {{ select_item.render_select_item(variable['title']) }}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form__num">
+                            <span>Количество</span>
+                            {{ amount.render_amount(value=1, class='form__amount', from_prod_page=True) }}
+                        </div>
+                        <div class="form__price">
+                            <p>Цена</p>
+                            <span>{{ variables[0]['price'] }}</span>
+                        </div>
+                    </div>
+                    <div class="hero__description">{{ product.description }}</div>
+                    <a class="form__submit btn btn-t2 btn-t2-hover" onclick="toggle_cart('{{ product.title }}', true, true, true)">
+                        <span>Купить</span>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block main %}
+<main>
+    <section class="properties">
+        <div class="container">
+            <div class="properties__wrap">
+                <div class="properties__img">
+                    <img src="{{ url_for('static', filename='img/glina_page1.png') }}">
+                </div>
+                <div class="properties__content">
+                    <div class="properties__title philosopher">Почему наша пищевая глина лучше других?</div>
+                    <ul class="properties__list">
+                        {{ numered_li.render_numered_li('01', 'Мы используем только пищевую глину, имеющую полезные свойства') }}
+                        {{ numered_li.render_numered_li('02', 'Продукт проходит многократную очистку, чтобы соответствовать пищевым стандартам') }}
+                        {{ numered_li.render_numered_li('03', 'Покупая продукт напрямую у производителя, вы защищаете себя от покупки подделок, а также экономите свои деньги') }}
+                    </ul>
+                    <div class="properties__discription">
+                        Современный темп жизни является большим испытанием для нашего организма: вредная еда, алкоголь, плохая экология, всё это проходит через нас и отравляет. Чтобы быть здоровым организм нужно очищать. Однако, найти среди огромного количества лекарственных и других продуктов хоть что-то стоящее, что не сделает только хуже очень сложно. На самом деле о нас уже позаботилась природа. Многое из того, что нужно для поддержания организма, она вместила в каолиновую глину. А компания Pavitra любезно передаёт это вам.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="fact">
+        <div class="container">
+            <div class="fact__wrap">
+                <div class="fact__img fact__img1">
+                    <img src="{{ url_for('static', filename='img/fact2.png') }}">
+                </div>
+                <div class="fact__text philosopher">Благодаря большому содержанию кремния, пищевая глина способствует формированию и поддержанию в хорошем состоянии соединительных, хрящевых, костных и других тканей. Что непременно укрепляет ногти, кости и волосы, борется с перхотью и зудом.            </div>
+                <div class="fact__img fact__img2">
+                    <img src="{{ url_for('static', filename='img/glina_fact.png') }}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="properties2">
+        <div class="container">
+            <div class="properties2__wrap">
+                <div class="properties2__text">
+                    Другие же её полезные вещества, которых там достаточно много, являются прекрасными абсорбентами и помогают организму выводить вредные вещества, восстанавливать и нормализовывать кислотно-щелочной баланс. 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="resultImages">
+        <div class="container">
+            <div class="resultImages__wrap">
+                <img id="resultImg1" src="{{ url_for('static', filename='img/glina_result1.png') }}">
+                <img id="resultImg2" src="{{ url_for('static', filename='img/glina_result2.png') }}">
+                <img id="resultImg3" src="{{ url_for('static', filename='img/glina_result3.png') }}">
+                <img src="{{ url_for('static', filename='img/list.png') }}">
+            </div>
+        </div>
+    </div>
+    <div class="howUse">
+        <div class="container">
+            <div class="howUse__wrap">
+                <div class="howUse__content">
+                    <div class="howUse__text">
+                        <p>Но самый лучший эффект получается от употребления каолиновой глины вместе с псиллиумом и касторовым маслом. Вместе они в разы усиливают положительные свойства друг друга. Кроме того, покупая их вместе вы экономите 30%.</p>
+                        <p>В отдельности глина за счет абсорбентов выводит из организма только 50% вредных веществ, но вместе с псиллиумом можно добиться 100% результата. Также псиллиум нормализует уровень холестерина, снижает уровень сахара и, также как каолин, восстанавливает кислотно-щелочной баланс. Оба этих продукта в совокупности с касторовым маслом отлично способствуют избавлению от лишнего веса.</p>
+                        <p>Кроме того, нашу глину можно использовать не только в еду. Наружное применение подсушивает и подтягивает кожу, разглаживает морщины и заживляет раны. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="howUse2">
+        <div class="container">
+            <div class="howUse2__wrap">
+                <div class="howUse2__img">
+                    <img src="{{ url_for('static', filename='img/secret2.png') }}">
+                </div>
+                <div class="howUse2__content">
+                    <div class="howUse2__title philosopher">
+                        Как принимать пищевую глину Pavitra?
+                    </div>
+                    <div>
+                        <p>Применение внутрь:</p>
+                        <ul class="howUse2__list">
+                            <li>1. Три чайные ложки порошка разводятся в стакане теплой воды</li>
+                            <li>2. Употреблять до еды 2 раза в день. При желании можно увеличить до 2-3 столовых ложек</li>
+                            <li>Не рекомендуется размешивать глину в воде металлической ложкой и использовать металлическую посуду!</li>
+                        </ul>
+                        <p>Наружное применение:</p>
+                        <ul class="howUse2__list">
+                            <li>1. Разведите глину с водой в таких пропорциях, чтобы получилась густая смесь, которая не будет стекать с вашей кожи.</li>
+                            <li>2. Прежде чем наносить смесь на лицо протестируйте ее на коже руки (10 минут).</li>
+                            <li>3. Держать на коже 20-25 минут, не больше.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %} 
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.stellar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/product_page.js') }}"></script>
+{% endblock %}

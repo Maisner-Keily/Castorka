@@ -1,0 +1,36 @@
+{% import 'amount.html' as amount %}
+
+{% macro render_select_item(value, product_title) %}
+<a class="item__select_option" onclick="set_cartItem_value(value='{{value}}', block=this); set_price(value='{{value}}', block=this, product_title='{{product_title}}')">{{ value }}</a>
+{% endmacro %}
+
+
+{% macro render_item(name, price, img_url, amount_num=1, bg_color='') %}
+<div class="cart__item item">
+    <div class="item__img" style="background-color: {{bg_color}};">
+        <img src="{{img_url}}">
+    </div>
+    <div class="item__content">
+        <h4 class="item__title philosopher">{{name}}</h4>
+        <input class="item__input" style="display: none;" type="text">
+        <div>
+            <div class="item__select_value" onclick="item_select_click(this)" onselectstart="return false" onmousedown="return false">
+                <p>0.5 л</p>
+                <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+                    <path d="M6.5 8L12.1292 0.5H0.870835L6.5 8Z" fill="#527C77" />
+                </svg>
+                <div class="item__select_list">
+                    {{ render_select_item('0.5 л', name) }}
+                    {{ render_select_item('1 л', name) }}
+                    {{ render_select_item('2 л', name) }}
+                </div>
+            </div>
+            <div class="item__price">{{price}}</div>
+        </div>
+        <div>
+            {{ amount.render_amount(value=amount_num) }}
+            <button class="item__delete">Удалить</button>
+        </div>
+    </div>
+</div>
+{% endmacro %}

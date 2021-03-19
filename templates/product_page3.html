@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% import 'amount.html' as amount %}
+{% import 'product_select_item.html' as select_item %}
+{% import 'product_numered_li.html' as numered_li %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product_page.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product_page-psill.css') }}">
+{% endblock %}
+
+{% block header %}
+<header class="header">
+    {% include 'nav.html' %}
+    <div class="hero">
+        <img class="hero__img" src="{{ product.product_img_src }}">
+        <div class="hero__bg" style="background-color:{{ product.bg_color }};"></div>
+        <div class="container">
+            <div class="hero__wrap">
+                <h2 class="hero__title philosopher">{{ product.title }}</h2>
+                <form class="form">
+                    <div class="form__wrapper">
+                        <div class="form__capacity">
+                            <p>Объём</p>
+                            <input type="text" id="capacity">
+                            <div class="form__select" onclick="select_click(this)" onselectstart="return false" onmousedown="return false">
+                                <span class="form__select_value">
+                                    <p>{{ variables[0]['title'] }}</p>
+                                    <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+                                        <path d="M6.5 8L12.1292 0.5H0.870835L6.5 8Z" fill="#527C77" />
+                                    </svg>
+                                </span>
+                                <div class="form__select_list">
+                                    {% for variable in variables %}
+                                        {{ select_item.render_select_item(variable['title']) }}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form__num">
+                            <span>Количество</span>
+                            {{ amount.render_amount(value=1, class='form__amount', from_prod_page=True) }}
+                        </div>
+                        <div class="form__price">
+                            <p>Цена</p>
+                            <span>{{ variables[0]['price'] }}</span>
+                        </div>
+                    </div>
+                    <div class="hero__description">{{ product.description }}</div>
+                    <a class="form__submit btn btn-t2 btn-t2-hover" onclick="toggle_cart('{{ product.title }}', true, true, true)">
+                        <span>Купить</span>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block main %}
+<main>
+    <section class="properties">
+        <div class="container">
+            <div class="properties__wrap">
+                <div class="properties__img">
+                    <img src="{{ url_for('static', filename='img/psill_page.png') }}">
+                </div>
+                <div class="properties__content">
+                    <div class="properties__title philosopher">Зачем нужен псиллиум?</div>
+                    <ul class="properties__list">
+                        {{ numered_li.render_numered_li('01', 'Улучшает пищеварение, очищает организм') }}
+                        {{ numered_li.render_numered_li('02', 'Заменяет глютен в выпечке') }}
+                        {{ numered_li.render_numered_li('03', 'Снижает давление, уровень холестерина и сахара') }}
+                        {{ numered_li.render_numered_li('04', 'Избавляет от изжоги') }}
+                        {{ numered_li.render_numered_li('05', 'Хорошо утоляет голод, помогает похудеть') }}
+                        {{ numered_li.render_numered_li('06', 'Замедляет усвоение жиров и углеводов') }}
+                    </ul>
+                    <div class="properties__discription">
+                        <div class="properties__useTitle philosopher">
+                            Принцип действия
+                        </div>
+                        <p>Во многих продуктах  содержатся вредные вещества. Например, стабилизаторы и консерванты, в других товарах присутствует пальмовое масло, а о вреде быстрых углеводов знает почти каждый. </p>
+                        <p>Всё это способствует развитию сердечно-сосудистых заболеваний, сахарному диабету, онкологиям, проблемам с зубами и многому другому. Конечно, совсем убрать их практически невозможно. Но вы можете заменить вредные ингредиенты полезными.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="fact">
+        <div class="container">
+            <div class="fact__wrap">
+                <div class="fact__img fact__img1">
+                    <img src="{{ url_for('static', filename='img/fact2.png') }}">
+                </div>
+                <div class="fact__text philosopher">Cостав: 85% - растворимая клетчатка, не содержит усваиваемых углеводов и жиров, что очень полезно для здоровья. Для сравнения, овсяные и пшеничные отруби только на 15% состоят из такой клетчатки и содержат более 60% усваиваемых углеводов.</div>
+                <div class="fact__img fact__img2">
+                    <img src="{{ url_for('static', filename='img/psill_fact.png') }}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="properties2">
+        <div class="container">
+            <div class="properties2__wrap">
+                <div class="properties2__text">
+                    Псиллиум (семена подорожника) – полноценная и полезная замена глютену, прекрасно скрепляет тесто, делает его пористым, воздушным. Вы можете навсегда убрать из рациона куриные яйца, заменив их семенами подорожника.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="resultImages">
+        <div class="container">
+            <div class="resultImages__wrap">
+                <img id="resultImg1" src="{{ url_for('static', filename='img/psill_result1.png') }}">
+                <img id="resultImg2" src="{{ url_for('static', filename='img/psill_result2.png') }}">
+                <img id="resultImg3" src="{{ url_for('static', filename='img/psill_result3.png') }}">
+                <img src="{{ url_for('static', filename='img/list.png') }}">
+            </div>
+        </div>
+    </div>
+    <div class="properties3">
+        <div class="container">
+            <div class="properties3__wrap">
+                <div class="properties3__text">
+                    Полезные свойства доказаны множеством научных исследований. Псиллиум Pavitra поможет вашему организму в современном образе жизни. Но ему не справиться одному. Для полного эффекта рекомендуют употреблять его вместе с пищевой глиной и касторовым маслом. Вместе они отлично дополняют друг друга, образуя синергический эффект. Покупая их вместе вы экономите 30%.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="howUse2">
+        <div class="container">
+            <div class="howUse2__wrap">
+                <div class="howUse2__img">
+                    <img src="{{ url_for('static', filename='img/secret2.png') }}">
+                </div>
+                <div class="howUse2__content">
+                    <div class="whyMe">
+                        <div class="whyMe__title philosopher">Чем Pavitra лучше других?</div>
+                        <ul class="whyMe__list">
+                            {{ numered_li.render_numered_li('01', 'Мы производим пищевой псиллиум из настоящего индийского подорожника, который безопасен даже для беременных и кормящих мам') }}
+                            {{ numered_li.render_numered_li('02', 'Покупая напрямую у нас, как у производителя, вы защищаете себя от покупки некачественного продукта и подделок, экономите свои деньги') }}
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="howUse2__title philosopher">Как употреблять псиллиум Pavitra?</div>
+                        <p>Для приёма разведите 2-3 чайные ложки порошка в стакане жидкости, Пейте через  10-15 минут. Рекомендуется выпить за 1 час до еды, либо через 2 часа после.</p>
+                        <p>Псиллиум можно добавлять в выпечку</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %} 
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.stellar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/product_page.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,54 @@
+/* line 1, ../../sass/product_page-oil.sass */
+.hero {
+  min-height: 630px; }
+  /* line 4, ../../sass/product_page-oil.sass */
+  .hero__wrap {
+    min-height: 630px; }
+  /* line 7, ../../sass/product_page-oil.sass */
+  .hero__img {
+    height: 580px;
+    -webkit-transform: translateX(0%) translateY(7%);
+            transform: translateX(0%) translateY(7%); }
+    @media screen and (max-width: 1440px) {
+      /* line 7, ../../sass/product_page-oil.sass */
+      .hero__img {
+        -webkit-transform: translateX(25%) translateY(7%);
+                transform: translateX(25%) translateY(7%); } }
+    @media screen and (max-width: 1120px) {
+      /* line 7, ../../sass/product_page-oil.sass */
+      .hero__img {
+        height: 530px; } }
+    @media screen and (max-width: 1024px) {
+      /* line 7, ../../sass/product_page-oil.sass */
+      .hero__img {
+        -webkit-transform: translateX(50%) translateY(7%);
+                transform: translateX(50%) translateY(7%); } }
+    @media screen and (max-width: 900px) {
+      /* line 7, ../../sass/product_page-oil.sass */
+      .hero__img {
+        height: 400px;
+        position: absolute;
+        left: 50%;
+        top: 0;
+        -webkit-transform: translateX(-60%) translateY(6%);
+                transform: translateX(-60%) translateY(6%); } }
+    @media screen and (max-width: 768px) {
+      /* line 7, ../../sass/product_page-oil.sass */
+      .hero__img {
+        height: 360px;
+        -webkit-transform: translateX(-50%) translateY(11%);
+                transform: translateX(-50%) translateY(11%); } }
+    @media screen and (max-width: 450px) {
+      /* line 7, ../../sass/product_page-oil.sass */
+      .hero__img {
+        height: 350px; } }
+    @media screen and (max-width: 400px) {
+      /* line 7, ../../sass/product_page-oil.sass */
+      .hero__img {
+        height: 230px;
+        -webkit-transform: translateX(-60%) translateY(0%);
+                transform: translateX(-60%) translateY(0%); } }
+    @media screen and (max-width: 340px) {
+      /* line 7, ../../sass/product_page-oil.sass */
+      .hero__img {
+        height: 220px; } }

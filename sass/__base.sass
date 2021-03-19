@@ -1,0 +1,697 @@
+@import '__cart_item.sass'
+@import '__amount.sass'
+@import '__score.sass'
+@import '__comment.sass'
+@import '__nav.sass'
+
+*
+    box-sizing: border-box
+
+body
+    background-color: #FAFAFA
+    color: #527C77
+    position: relative
+    min-height: 100vh
+    
+body, header, footer, button
+    font-size: 16px
+    margin: 0
+    line-height: 150%
+    font-family: 'PT Mono', monospace
+
+    @media screen and (max-width: 450px)
+        font-size: 14px
+    
+footer
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    
+.logo
+    display: flex !important
+    flex-direction: row
+    align-items: center
+    
+    svg:first-child
+        margin-right: 12px
+
+        @media screen and ( max-width: 400px )
+            max-width: 25px
+
+    svg:last-child
+        @media screen and ( max-width: 400px )
+            max-width: 80px
+
+.header
+    position: relative
+
+a
+    text-decoration: none
+    color: inherit
+
+ul
+    margin: 0
+    padding: 0
+    
+.container
+    max-width: 1200px
+    padding: 0 15px
+    width: 100%
+    position: relative
+    margin: 0 auto
+
+    @media screen and (max-width: 1024px)
+        padding: 0 50px
+
+    @media screen and (max-width: 450px)
+        padding: 0 20px
+
+.philosopher
+    font-family: 'Philosopher', sans-serif
+
+button, button:focus, a, a:focus, input, input:focus, textarea
+    outline: none
+    cursor: pointer
+
+textarea, input
+    color: inherit
+
+textarea
+    resize: none
+
+h1, h2, h3, h4, h5, h6, blockquote
+    font-family: 'Philosopher', sans-serif
+    line-height: 100%
+    margin: 0
+
+h1, h2, h3, h4, h5, h6
+    font-weight: normal
+
+h1
+    font-size: 80px
+
+    @media screen and (max-width: 1024px)
+        font-size: 60px
+
+    @media screen and (max-width: 450px)
+        font-size: 42px
+
+h2
+    font-size: 58px
+
+    @media screen and ( max-width: 1024px )
+        font-size: 48px
+
+    @media screen and ( max-width: 450px )
+        font-size: 38px
+
+h3
+    font-size: 48px
+
+    @media screen and ( max-width: 1024px )
+        font-size: 42px
+
+    @media screen and ( max-width: 450px )
+        font-size: 32px
+
+    @media screen and ( max-width: 340px )
+        font-size: 22px
+
+h4
+    font-size: 28px
+
+    @media screen and ( max-width: 1024px )
+        font-size: 32px
+
+    @media screen and ( max-width: 450px )
+        font-size: 24px
+
+h5
+    font-size: 18px
+
+blockquote
+    font-size: 18px
+
+.btn
+    position: relative
+    height: 60px
+    display: block
+
+    span
+        position: absolute
+        z-index: 2
+        top: 50%
+        transform: translateY(-50%)
+        width: 100%
+        text-align: center
+
+    &-t1
+        width: 250px
+        padding: 0 !important
+
+        &-hover
+            &::before
+                background-color: #527C77
+                content: ''
+                display: block
+                position: absolute
+                right: 0
+                top: 0
+                z-index: 1
+                height: 100%
+                width: 0
+                transition: width .4s ease
+
+            &:hover::before
+                width: 100%
+                left: 0
+                right: auto
+                transition: width .4s ease
+
+            &:active::before
+                width: 100%
+                left: 0
+                background-color: #466864
+
+    &-t2
+        display: block
+        width: 230px
+        padding: 0 !important
+        background-color: #527C77
+
+        &-hover
+            &::before
+                background-color: #CEF7EE
+                content: ''
+                display: block
+                position: absolute
+                right: 0
+                top: 0
+                z-index: 1
+                height: 100%
+                width: 0
+                transition: width .4s ease
+
+            &:hover::before
+                width: 100%
+                left: 0
+                right: auto
+                transition: width .4s ease
+
+            &:hover span
+                color: #527C77
+
+            &:active::before
+                width: 100%
+                left: 0
+                background-color: #C8ECE4
+
+.menu
+    position: fixed
+    right: 0
+    top: 0
+    width: 520px
+    padding: 35px
+    height: 100vh
+    max-height: 100vh
+    background-color: #fff
+    z-index: 10
+    transform: translateX(100%)
+
+    &__on
+        transform: translateX(0%)
+        transition: transform .5s ease
+
+    .logo
+        fill: #527C77
+
+    @media screen and ( max-width: 520px )
+        width: 100%
+        padding: 30px 20px
+
+    &__header
+        width: 100%
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+
+        a
+            display: block
+
+    &__main
+        width: 100%
+        padding-top: 60px
+
+    &__link
+        font-size: 42px
+        text-decoration: underline
+        margin-bottom: 50px
+        display: block
+        line-height: 120%
+
+        @media screen and ( max-width: 450px )
+            font-size: 32px
+            margin-bottom: 25px
+
+    &__footer
+        width: 100%
+        display: flex
+        flex-direction: row
+        padding-top: 100px
+
+    &__inst
+        width: 173px
+        text-align: center
+        padding: 20px
+        display: block
+        border: 1px solid rgba(#527C77, .3)
+        margin-right: 20px
+
+    &__chat
+        width: 173px
+        display: flex
+        padding: 20px
+        border: 1px solid rgba(#527C77, .3)
+        
+        svg
+            margin: auto
+
+.cart
+    position: fixed
+    right: 0
+    top: 0
+    width: 520px
+    padding: 35px
+    height: 100%
+    max-height: 100vh
+    background-color: #fff
+    z-index: 10
+    transform: translateX(100%)
+
+    @media screen and ( max-width: 520px )
+        width: 100%
+        padding: 30px 20px
+
+    &__on
+        transform: translateX(0)
+        transition: transform .5s ease
+
+    &__exit
+        cursor: pointer
+
+    &__wrap
+        width: 100%
+        height: 100%
+        position: relative
+
+    &__ellipse
+        width: 21px
+        height: 21px
+        border-radius: 50%
+        background-color: #F9EB6E
+        position: absolute
+        right: 0
+        top: 50%
+        transform: translateY(-35%)
+        z-index: 2
+        font-size: 10px
+        display: flex
+        flex-direction: row
+        align-items: center
+        justify-content: center
+        color: #527C77
+
+    &__main
+        overflow-y: auto
+        flex-direction: column
+        justify-content: center
+
+    &__header
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        align-items: center
+        border-bottom: 2px solid #527C77
+        padding-bottom: 15px
+        margin-bottom: 10px
+
+        button
+            background-color: transparent
+            border: none
+            color: #527C77
+            display: flex
+            flex-direction: row
+            align-items: center
+
+            svg
+                display: block
+                margin-left: 10px
+
+    &__promo
+        font-size: 14px
+        position: relative
+
+        input
+            width: 145px
+            margin-top: 10px
+            height: 30px
+            border: none
+            border-bottom: 1px solid #527C77
+
+            &:focus
+                outline: none
+
+        a
+            background-color: transparent
+            border: none
+            position: absolute
+            right: 0
+            bottom: 10px
+
+    &__title
+        position: relative
+        padding-right: 30px
+
+    &__sum
+        font-size: 32px
+        text-align: right
+
+        span
+            font-size: 14px
+            display: block
+            width: 100%
+            text-align: right
+            margin-bottom: 10px
+
+        p
+            margin: 0
+
+    &__continue
+        color: #ffffff
+        padding: 19px 32px
+        background-color: #527C77
+        border: none
+
+    &__footer
+        padding-top: 30px
+        border-top: 1px solid #527C77
+        position: absolute
+        bottom: 0
+        left: 0
+        z-index: 5
+        background-color: #fff
+        width: 100%
+        
+        &>div
+            display: flex
+            flex-direction: row
+            justify-content: flex-end
+
+        &>span
+            display: flex
+            width: 100%
+            flex-direction: row
+            justify-content: flex-end
+            margin-top: 40px
+
+.comments
+    background-color: #36A395
+    width: 100%
+    color: #fff
+    padding: 60px 0
+
+    @media screen and ( max-width: 1024px )
+        padding: 80px 0
+
+    @media screen and (max-width: 450px)
+        padding: 50px 0
+
+    &__wrap
+        width: 100%
+        display: flex
+        flex-direction: column
+        align-items: center
+
+    &__title
+        margin-bottom: 60px
+        display: flex
+        flex-direction: column
+        align-items: center
+
+        @media screen and ( max-width: 1024px )
+            margin-bottom: 50px
+
+        @media screen and (max-width: 450px)
+            margin-bottom: 40px
+
+        &::after
+            content: ''
+            display: block
+            width: 0
+            margin-top: 30px
+            height: 36px
+            border: 1px solid #FFFFFF
+
+    &__all
+        margin-top: 60px
+        padding: 19px 37px
+        border: 1px solid #61ADA3
+        margin-bottom: 20px
+
+        @media screen and (max-width: 768px)
+            margin-bottom: 50px
+
+        @media screen and (max-width: 450px)
+            margin-bottom: 40px
+
+.whereBuy
+    width: 100%
+    padding: 120px 0 70px
+
+    @media screen and (max-width: 1024px)
+        padding: 90px 0
+
+    @media screen and (max-width: 770px)
+        padding: 85px 0 60px
+
+    @media screen and (max-width: 450px)
+        padding: 70px 0
+
+    &__wrap
+        display: flex
+        flex-direction: column
+        align-items: center
+
+    &__title
+        margin-bottom: 40px
+        display: flex
+        flex-direction: column
+        align-items: center
+
+        @media screen and (max-width: 770px)
+            margin-bottom: 30px
+
+        @media screen and ( max-width: 450px )
+            font-size: 38px !important
+
+        &::after
+            content: ''
+            width: 0px
+            height: 36px
+            margin-top: 30px
+            border: 1px solid #527C77
+            display: block
+
+.address
+    display: flex
+    flex-direction: column
+    align-items: center
+    width: 100%
+
+    &__title
+        font-size: 28px
+        margin-bottom: 50px
+        line-height: 140%
+        font-family: 'Philosopher', sans-serif
+
+        @media screen and (max-width: 450px)
+            margin-bottom: 40px
+            text-align: center
+
+    &__list
+        padding: 0
+        width: 70%
+        display: flex
+        flex-direction: row
+        align-items: center
+        list-style: none
+
+        @media screen and (max-width: 1024px)
+            width: 100%
+
+        @media screen and (max-width: 770px)
+            flex-direction: column
+            justify-content: flex-start
+
+        li
+            display: block
+            line-height: 140%
+
+            @media screen and (max-width: 770px)
+                margin-bottom: 40px
+                text-align: center
+
+                &:last-child
+                    margin-bottom: 0
+            
+.mainFooter
+    width: 100%
+    border-top: 1px solid rgba(#527C77, .1)
+    padding: 30px 0 75px
+
+    &__wrap
+        display: flex
+        flex-direction: column
+        align-items: center
+        
+        &>div:first-child
+            display: flex
+            width: 100%
+            flex-direction: row
+            align-items: center
+            justify-content: space-between
+
+            @media screen and (max-width: 450px)
+                flex-direction: column
+
+        &>div
+            @media screen and (max-width: 450px)
+                flex-direction: column
+
+    &__logo
+        svg
+            fill: #527C77
+
+    &__nav
+        list-style: none
+        padding: 0
+        display: flex
+        width: 60%
+        flex-direction: row
+        justify-content: space-between
+
+        @media screen and (max-width: 1024px)
+            display: none
+
+        li
+            display: block
+
+        a
+            position: relative
+
+            &::before
+                content: ''
+                display: block
+                width: 0
+                position: absolute
+                right: 0
+                bottom: -2px
+                height: 2px
+                background-color: #527C77
+                transition: width .4s ease
+
+            &:hover::before
+                width: 100%
+                left: 0
+                right: auto
+                transition: width .4s ease
+
+    &__inst
+        padding: 20px 43px
+        border: 1px solid #527C77
+        width: 175px
+
+        &:hover
+            color: #fff
+
+        @media screen and (max-width: 450px)
+            margin: 30px 0
+            
+    &__copy
+        display: flex
+        flex-direction: row
+        align-items: center
+        padding-top: 25px
+
+        @media screen and (max-width: 1024px)
+            justify-content: space-between
+            width: 100%
+
+        @media screen and (max-width: 550px)
+            padding: 0
+            flex-direction: column
+            margin-top: 30px
+
+        @media screen and (max-width: 450px)
+            margin-top: 0
+            
+        a
+            display: block
+            margin: 0 15px
+            font-size: 14px
+            position: relative
+
+            @media screen and (max-width: 1024px)
+                margin: 0
+
+            @media screen and (max-width: 600px)
+                text-align: center
+                width: 100%
+                margin-bottom: 20px
+
+            &::before
+                content: ''
+                display: block
+                width: 0
+                position: absolute
+                right: 0
+                bottom: -2px
+                height: 2px
+                background-color: #527C77
+                transition: width .4s ease
+
+            &:hover::before
+                width: 100%
+                left: 0
+                right: auto
+                transition: width .4s ease
+        
+        &>div
+            display: flex
+            flex-direction: row
+
+            @media screen and (max-width: 770px)
+                width: 33%
+
+            @media screen and (max-width: 550px)
+                width: 100%
+
+
+        &>div:last-child
+            @media screen and (max-width: 770px)
+                width: 66%
+                justify-content: space-between
+
+            @media screen and (max-width: 550px)
+                flex-direction: column
+                width: 100%
+
+            a:last-child
+                @media screen and (max-width: 1024px)
+                    margin-left: 45px
+
+                @media screen and (max-width: 770px)
+                    margin: 0
+
+

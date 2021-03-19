@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %} {% endblock %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/polit.css') }}">
+{% endblock %}
+
+
+{% block header %}
+{% include 'nav.html' %}
+{% endblock %}
+
+
+{% block main %} 
+<main class='main'>
+  <div class="container">
+    <div class="polit">
+      <h2 class="polit__title philosopher">Политика конфиденциальности</h2>
+      <div class="polit__main">
+        <aside class="polit__aside">
+          <ul>
+            {% for elem in elems %}
+              <li>
+                <a class="philosopher" href="#{{elem.block_id}}">{{elem.key}}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </aside>
+        <div class="polit__wrap">
+          {% for elem in elems %}
+            <div class="elem" id="{{elem.block_id}}">
+              <div class='elem__title'>{{ elem.key }}</div>
+              <div class="elem__text">
+                {{ elem.value }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% macro render_address(addr, work_time='', tel='') %}
+<li>
+    {{ addr }}<br>
+    {% if work_time %}
+        {{ work_time }} <br>
+    {% endif %}
+    {% if tel %}
+        тел. {{ tel }}
+    {% endif %}
+</li>
+{% endmacro %}
