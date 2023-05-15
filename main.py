@@ -1,10 +1,10 @@
 from flask import Flask, request, url_for, render_template, session
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate, MigrateCommand
-from flask_script import Manager
+from flask_migrate import Migrate#, MigrateCommand
+# from flask_script import Manager
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, BooleanField, IntegerField
-from wtforms.fields.html5 import TelField
+# from wtforms.fields.html5 import TelField
 from wtforms.validators import DataRequired, Email, Regexp
 import datetime
 
@@ -13,16 +13,16 @@ app.debug = True
 app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(days=365)
 app.config['SECRET_KEY'] = 'a really really really really long secret key'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/python/castorka/mysql.db'
-manager = Manager(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./mysql.db'
+# manager = Manager(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-manager.add_command('db', MigrateCommand)
+# manager.add_command('db', MigrateCommand)
 
 
 class CheckoutForm(FlaskForm):
     name = StringField('name')
-    tel = TelField('tel')  # "/(?:\+|\d)[\d\-\(\) ]{9,}\d/g"
+    tel = StringField('tel')  # "/(?:\+|\d)[\d\-\(\) ]{9,}\d/g"
     email = StringField('email')
     town = StringField('town')
     street = StringField('street')
